@@ -1,0 +1,9 @@
+telethon
+requests
+speedtest-cli
+hijridate
+astral
+pytz
+Pillow
+arabic-reshaper
+python-bidi==0.4.2
