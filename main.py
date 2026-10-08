@@ -59,7 +59,7 @@ client = TelegramClient(
 
 clock_running = False
 
-tz = pytz.timezone("Asia/Tashkent")
+tz = pytz.timezone("Europe/Istanbul")
 
 ban_list = set()
 ban_info = {}
