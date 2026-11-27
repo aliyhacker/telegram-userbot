@@ -43,7 +43,7 @@ async def make_real_telegram_stik(event):
     cmd = event.raw_text[len(".stik"):].strip()
 
     user = None
-    name = "Jallodbek"
+    name = "JonyRicher"
 
     
     if event.is_reply:
