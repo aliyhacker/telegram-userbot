@@ -45,8 +45,6 @@ def load_clock_state():
             "enabled": False,
             "original_last_name": None
         }
-
-
 def save_clock_state(state):
     with open(STATE_FILE, "w", encoding="utf-8") as file:
         json.dump(state, file, ensure_ascii=False, indent=2)
@@ -56,7 +54,6 @@ def remove_clock(last_name):
     if not last_name:
         return ""
 
-    # Remove our clock from the end of the last name.
     pattern = r"\s+[⓿❶❷❸❹❺❻❼❽❾]{2}:[⓿❶❷❸❹❺❻❼❽❾]{2}$"
 
     cleaned = re.sub(pattern, "", last_name)
@@ -106,8 +103,6 @@ async def update_profile_time(
         ).total_seconds()
 
         await asyncio.sleep(wait_time)
-
-
 def register_profile_clock(
     client,
     tz,
@@ -134,7 +129,6 @@ def register_profile_clock(
 
             me = await client.get_me()
 
-            # Save the original last name only once.
             state = load_clock_state()
 
             if state.get("original_last_name") is None:
@@ -193,14 +187,13 @@ def register_profile_clock(
                 "⏰ Profile clock disabled."
             )
 
-    # Restore clock automatically after restart.
     state = load_clock_state()
 
     if state.get("enabled"):
 
         set_clock_state(True)
 
-        asyncio.create_task(
+        client.loop.create_task(
             update_profile_time(
                 client,
                 tz,

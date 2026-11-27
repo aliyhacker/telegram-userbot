@@ -73,7 +73,11 @@ def register_com(client):
                 "• <code>.ai</code> - AI response\n"
                 "• <code>.ai1</code> - Ask AI using text after .ai1\n"
                 "• <code>.aimode</code> - Toggle AI chat mode\n"
-                "• <code>.autoreply</code> - Toggle auto-reply\n"
+                "• <code>.autoreply on/off</code> - Toggle auto-reply\n"
+                "• <code>.arblock</code> | <code>.arblock &lt;user&gt;</code> - Exclude user from auto-reply\n"
+                "• <code>.arunblock</code> | <code>.arunblock &lt;user&gt;</code> - Remove user from auto-reply exclusion\n"
+                "• <code>.arlist</code> - Show excluded auto-reply users\n"
+                "• <code>.arrefresh</code> - Refresh profile &amp; channel posts cache\n"
                 "• <code>.code</code> - Generate code with AI"
             ),
 
@@ -103,18 +107,14 @@ def register_com(client):
 
         for index, section in enumerate(sections):
 
-            # Convert HTML into real Telegram text + entities
             clean_text, section_entities = html.parse(section)
 
-            # Shift bold/code entities to their correct position
             for entity in section_entities:
                 entity.offset += current_offset
                 final_entities.append(entity)
 
-            # Telegram uses UTF-16 entity lengths
             section_length = len(add_surrogate(clean_text))
 
-            # Add separate collapsed quote
             final_entities.append(
                 MessageEntityBlockquote(
                     offset=current_offset,
@@ -126,7 +126,6 @@ def register_com(client):
             final_text += clean_text
             current_offset += section_length
 
-            # Space between quotes
             if index < len(sections) - 1:
                 final_text += "\n\n"
                 current_offset += 2

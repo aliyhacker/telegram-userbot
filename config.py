@@ -10,6 +10,9 @@ OWNER_ID = 7139267058
 OPENROUTER_API_KEY = "your_openrouter_api_key"
 GROQ_API_KEY = "YOUR_GROQ_API_KEY"
 OPENWEATHER_API_KEY = "your_open_weather_api_key"
+GEMINI_API_KEY = "your_kemini_key"
+# Cloudflare worker url
+CLOUDFLARE_WORKER_URL = "your_cloudflare_worker_url"
 # Auto Reply Ai prompt
 AUTO_REPLY_PROMPT = """
 You MUST return exactly one JSON object.
